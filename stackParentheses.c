@@ -10,7 +10,7 @@ void pop(stack** head){
     if(*head==NULL)return;
     if((*head)->back!=NULL){
         *head = (*head)->back;
-        *head = NULL;
+        (*head)->next = NULL;
         free((*head)->next);
         return;
     }
