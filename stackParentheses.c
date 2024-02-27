@@ -4,6 +4,7 @@
 typedef struct stack{
     char data;
     struct stack* next;
+    struct stack* back;
 }stack;
 void pop(stack** head){
     if(*head==NULL)return;
@@ -17,19 +18,17 @@ void pop(stack** head){
 
 void push(stack** head,char data){
     stack* new = calloc(1,sizeof(stack));
-    stack* temp = *head;
     new->data = data;
     new->next = NULL;
-    if(temp==NULL){
-        temp = new;
-        free(new);
+    new->back = NULL;
+    if(*head==NULL){
+        *head = new;
         return;
     }
-    while(temp->next!=NULL){
-        temp = temp->next;
-    }
-    temp->next = new;
-    
+    new->back = *head;
+    (*head)->next = new;
+    *head = (*head)->next;
+
 }
 
 void main(void){
