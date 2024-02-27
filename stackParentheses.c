@@ -8,10 +8,13 @@ typedef struct stack{
 }stack;
 void pop(stack** head){
     if(*head==NULL)return;
-    if((*head)==NULL){
-        free(*head);
+    if((*head)->back!=NULL){
+        *head = (*head)->back;
+        *head = NULL;
+        free((*head)->next);
         return;
     }
+    *head = NULL;
     free((*head));
 }
 
